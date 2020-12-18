@@ -17,7 +17,7 @@ const GooleAuth = () => {
           // auth.current.isSignedIn.listen()
         });
     });
-  }, []);
+  }, [setIsSignedIn]);
   return <div>Sign in by GOOGLE !</div>;
 };
 export default GooleAuth;
