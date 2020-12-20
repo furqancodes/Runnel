@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
-
-const GooleAuth = () => {
-  const [isSignedIn, setIsSignedIn] = useState(null);
+import React, { useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { signIn, signOut } from "../actions";
+const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
   const auth = useRef("");
   useEffect(() => {
     window.gapi.load("client:auth2", () => {
@@ -13,13 +13,17 @@ const GooleAuth = () => {
         })
         .then(() => {
           auth.current = window.gapi.auth2.getAuthInstance();
-          setIsSignedIn(auth.current.isSignedIn.get());
+          onAuthChnage(auth.current.isSignedIn.get());
           auth.current.isSignedIn.listen(onAuthChnage);
         });
     });
   });
-  const onAuthChnage = (isSignedInP) => {
-    setIsSignedIn(isSignedInP);
+  const onAuthChnage = (isSignedIn) => {
+    if (isSignedIn) {
+      signIn();
+    } else {
+      signOut();
+    }
   };
   const signInDecider = () => {
     if (isSignedIn === null) {
@@ -53,5 +57,8 @@ const GooleAuth = () => {
   };
   return <div>{signInDecider()}</div>;
 };
-export default GooleAuth;
+const mapStateToProps = (state) => {
+  return { isSignedIn: state.auth.isSignedIn };
+};
+export default connect(mapStateToProps, { signIn, signOut })(GooleAuth);
 //
