@@ -18,8 +18,8 @@ const GooleAuth = () => {
         });
     });
   });
-  const onAuthChnage = () => {
-    setIsSignedIn(auth.current.isSignedIn.get());
+  const onAuthChnage = (isSignedInP) => {
+    setIsSignedIn(isSignedInP);
   };
   const signInDecider = () => {
     if (isSignedIn === null) {
