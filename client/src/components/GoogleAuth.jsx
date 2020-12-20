@@ -20,7 +20,7 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
   });
   const onAuthChnage = (isSignedIn) => {
     if (isSignedIn) {
-      signIn();
+      signIn(auth.current.currentUser.get().getId());
     } else {
       signOut();
     }
