@@ -17,9 +17,10 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
           auth.current.isSignedIn.listen(onAuthChnage);
         });
     });
-  });
-  const onAuthChnage = (isSignedIn) => {
-    if (isSignedIn) {
+    // eslint-disable-next-line
+  }, []);
+  const onAuthChnage = (isSignedInp) => {
+    if (!isSignedInp) {
       signIn(auth.current.currentUser.get().getId());
     } else {
       signOut();
@@ -34,7 +35,7 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
         <button
           className="ui red google button"
           onClick={() => {
-            auth.current.signOut();
+            signOut();
           }}
         >
           <i className="google icon" />
@@ -46,7 +47,7 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
         <button
           className="ui blue google button"
           onClick={() => {
-            auth.current.signIn();
+            signIn();
           }}
         >
           <i className="google icon" />
