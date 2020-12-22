@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions";
+
 const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
   const auth = useRef("");
   useEffect(() => {
@@ -20,7 +21,7 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
     // eslint-disable-next-line
   }, []);
   const onAuthChnage = (isSignedInp) => {
-    if (!isSignedInp) {
+    if (isSignedInp) {
       signIn(auth.current.currentUser.get().getId());
     } else {
       signOut();
@@ -35,7 +36,7 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
         <button
           className="ui red google button"
           onClick={() => {
-            signOut();
+            auth.current.signOut();
           }}
         >
           <i className="google icon" />
@@ -47,7 +48,7 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
         <button
           className="ui blue google button"
           onClick={() => {
-            signIn();
+            auth.current.signIn();
           }}
         >
           <i className="google icon" />
@@ -59,6 +60,7 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
   return <div>{signInDecider()}</div>;
 };
 const mapStateToProps = (state) => {
+  console.log(state.auth.isSignedIn);
   return { isSignedIn: state.auth.isSignedIn };
 };
 export default connect(mapStateToProps, { signIn, signOut })(GooleAuth);
