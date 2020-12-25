@@ -60,7 +60,6 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
   return <div>{signInDecider()}</div>;
 };
 const mapStateToProps = (state) => {
-  console.log(state.auth.isSignedIn);
   return { isSignedIn: state.auth.isSignedIn };
 };
 export default connect(mapStateToProps, { signIn, signOut })(GooleAuth);
