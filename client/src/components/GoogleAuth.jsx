@@ -20,8 +20,8 @@ const GooleAuth = ({ isSignedIn, signOut, signIn }) => {
     });
     // eslint-disable-next-line
   }, []);
-  const onAuthChnage = (isSignedInp) => {
-    if (isSignedInp) {
+  const onAuthChnage = (isSignedInu) => {
+    if (isSignedInu) {
       signIn(auth.current.currentUser.get().getId());
     } else {
       signOut();
